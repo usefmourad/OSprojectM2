@@ -99,7 +99,8 @@ public class Main {
     {
         String res = "";
 
-        int totalTime = 0;
+
+        int currentTime= 0;
 
         ArrayList list = new ArrayList<Process>();
 
@@ -124,11 +125,53 @@ public class Main {
 
         Arrays.sort(arrivalsInt);
 
+        while(!list.isEmpty())
+        {
+        
+
+        ArrayList sameExecList = new ArrayList<Integer>();
+
+        for(int i = 0; i<list.size(); i++)
+        {
+            Process p = (Process) list.get(i);
+
+            if(p.arrivalTime <= currentTime)
+            {
+                sameExecList.add(p.execTime);
+            }
+        }
+
+        Collections.sort(sameExecList);
+
+        while(! sameExecList.isEmpty())
+        {
+            int min = (int) sameExecList.get(0);
+            
+            for(int i = 0; i<list.size(); i++)
+            {
+                Process p = (Process) list.get(i);
+                if(p.execTime == min)
+                {
+                    res += p.name + "(" + p.execTime + "),";
+                    list.remove(i);
+                    sameExecList.remove(0);
+                    currentTime += min;
+                    break;
+                }
+            }
+        }
+
+    }
+
+        res = res.substring(0, res.length() - 1);
+
+        return res;
+    }
 
 
-
-
-
+    public static String Scheduler_RR(String input)
+    {
+        String res = "";
 
 
 
@@ -146,7 +189,7 @@ public class Main {
 
         String input = "A,B,C,D,E;0,2,4,5,8;3,6,4,5,2";
 
-        String res = Scheduler_FCFS(input);
+        String res = Scheduler_SJF(input);
 
         System.out.println(res);
         
