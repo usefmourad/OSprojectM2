@@ -214,7 +214,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String input = "Hi,Bye;0,0;4,2";
+        String input = "A,B,C,D,E;0,2,4,5,8;3,6,4,5,2";
 
         String res = Scheduler_RR(input);
 
